@@ -15,9 +15,9 @@
         <!-- About POST Button-->
         <form method="POST">
             {% for blogs in blogs.all %}
-            <h3>제목 : {{blogs.title}}</h3>
-            <p>작성일 : {{blogs.pub_date}}</p><hr>
-            <p>내용 :: {{blogs.body}}</p><hr>
+            <h3>제목 : {{blog.title}}</h3>
+            <p>작성일 : {{blog.pub_date}}</p><hr>
+            <p>내용 :: {{blog.body}}</p><hr>
             {% endfor %}
         </div>
     </div>
