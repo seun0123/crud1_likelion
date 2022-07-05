@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BlogForm
 from django.utils import timezone
-from .models import Blog
+from .models import Post
 
 # Create your views here.
 def main(request):
@@ -20,9 +20,9 @@ def create(request):
         return render(request, 'write.html', {'form':form})
 
 def read(request):
-    blogs = Blog.objects
+    blogs = Post.objects
     return render(request, 'read.html', {'blogs':blogs})
 
 def detail(request, id):
-    blog = get_object_or_404(Blog, id=id)
+    blog = get_object_or_404(Post, id=id)
     return render(request, 'read.html', {'blog':blog})
