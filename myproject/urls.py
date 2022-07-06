@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import myapp.views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', myapp.views.main, name='main'),
     path('write/', myapp.views.create, name='write'),
     path('read/', myapp.views.read, name='read'),
-]
+    path('detail/<str:id>', myapp.views.detail, name='detail'),
+    path('update/<str:id>', myapp.views.update, name='update'),
+    path('delete/<str:id>', myapp.views.delete, name='delete'),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

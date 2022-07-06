@@ -5,7 +5,7 @@
 <section class="page-section bg-primary text-white mb-0" id="about">
     <div class="container">
         <!-- About Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-white">Create</h2>
+        <h2 class="page-section-heading text-center text-uppercase text-white">Edit</h2>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
@@ -18,7 +18,7 @@
             <table>
                 {{form.as_table}}
             </table>
-            <button class="btn btn-dark btn-xl" type="submit">작성</button>
+            <button class="btn btn-dark btn-xl" type="submit" href="{{% url 'edit' blog.id %}}">수정</button>
         </div>
     </div>
 </section>
