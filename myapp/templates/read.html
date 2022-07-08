@@ -6,20 +6,14 @@
     <div class="container">
         <!-- About Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-white">Read</h2><br><br>
-        <!-- Icon Divider-->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <!-- About POST Button-->
-        <form method="POST">
-            {% for blogs in blogs.all %}
-            <h3>제목 : {{blogs.title}}</h3>
+        {% for blogs in blogs.all %}
+            <h3 style="background-color:#ffc107;"> 제목 : <a href="{% url 'detail' blogs.id %}">{{blogs.title}}</a></h3>
             <p>작성일 : {{blogs.pub_date}}</p><hr>
             <p>내용 : {{blogs.body}}</p><hr>
+            {% if blogs.image %}
+                <img src="{{ blogs.image.url }}" width="250" height="250" alt="image">
+            {% endif %}
             {% endfor %}
-        </div>
     </div>
 </section>
 {% endblock %}

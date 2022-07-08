@@ -7,14 +7,14 @@ from .models import Post
 def main(request):
     return render(request, 'main.html')
 
-def create(request):
+def write(request):
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save(commit=False)
             form.pub_date = timezone.now()
             form.save()
-            return redirect('read')
+            return redirect('main')
     else:
         form = BlogForm
         return render(request, 'write.html', {'form':form})
@@ -30,26 +30,18 @@ def detail(request, id):
 def edit (request, id):
     blog = get_object_or_404(Post, id=id)
     if request.method == "POST":
-        form = BlogForm(request.POST, instance=blog)
+        form = BlogForm(request.POST, request.FILES, instance=blog)
         if form.is_valid():
             form.save(commit=False)
+            form.pub_date = timezone.now()
             form.save()
-            return redirect('detail')
+            return redirect('read')
     else:
         form = BlogForm(instance=blog)
         return render(request, 'edit.html', {'form':form})
 
-def update(request, id):
-    update_post = Post.objects.get(id=id)
-    update_post.title = request.POST['title']
-    update_post.pub_date = timezone.now()
-    update_post.writer = request.POST['writer']
-    update_post.body = request.POST['body']
-    update_post.save()
-    return redirect('detail',id)
-
 def delete(request, id):
-    delete_post = Post.objects.get(id=id)
-    delete_post.delete()
-    return redirect('detail')
+    blog = get_object_or_404(Post, id=id)
+    blog.delete()
+    return redirect('read')
 
